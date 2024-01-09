@@ -1,0 +1,2 @@
+1. One
+    Connect backend with frontend | Fullstack Proxy and CORS (Video No. 3)
