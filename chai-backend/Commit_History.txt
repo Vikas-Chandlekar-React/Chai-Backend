@@ -1,1 +1,8 @@
 3. Add initial files for backend
+
+4. Add following : 
+    - Create public folder and temp folder in public 
+    - Install dev dependency nodemon 
+    - Setup project files and folders
+    - Install dev dependency prettier
+        - .prettierignore, .prettierrc file 

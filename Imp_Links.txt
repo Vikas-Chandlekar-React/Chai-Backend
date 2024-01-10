@@ -1,2 +1,5 @@
 1. Youtube clone that we build in future UI : 
     - https://devuiv2.vercel.app/templates/youtube
+
+2. gitignore generator 
+    - https://mrkandreev.name/snippets/gitignore-generator/
