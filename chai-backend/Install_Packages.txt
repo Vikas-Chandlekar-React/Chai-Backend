@@ -3,3 +3,5 @@
 2. npm i -D prettier
 
 3. npm i express mongoose dotenv
+
+4. npm i cors cookie-parser

@@ -9,3 +9,11 @@
 
 5. Add Following : 
     - Connect to MONGODB (2 WAYS)
+
+6. Add Following : 
+    - Install cors and cookie-parser middleware.
+    - Add multiple middlewares for handle data from req.body and from url 
+    - Add production standard code in util folder : 
+        - asyncHandler 
+        - ApiError 
+        - ApiResponse
