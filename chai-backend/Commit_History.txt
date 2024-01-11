@@ -6,3 +6,6 @@
     - Setup project files and folders
     - Install dev dependency prettier
         - .prettierignore, .prettierrc file 
+
+5. Add Following : 
+    - Connect to MONGODB (2 WAYS)

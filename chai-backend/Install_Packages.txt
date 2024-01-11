@@ -1,3 +1,5 @@
 1. npm i -D nodemon
 
 2. npm i -D prettier
+
+3. npm i express mongoose dotenv
