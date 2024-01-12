@@ -5,3 +5,9 @@
 3. npm i express mongoose dotenv
 
 4. npm i cors cookie-parser
+
+5. npm i mongoose-aggregate-paginate-v2
+
+6. npm i bcrypt
+
+7. npm i jsonwebtoken

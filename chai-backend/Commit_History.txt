@@ -17,3 +17,12 @@
         - asyncHandler 
         - ApiError 
         - ApiResponse
+
+7. Add Following : 
+    - Install bcrypt, jsonwebtoken, mongoose-aggregate-paginate-v2.
+    - Create User, Video Schema.
+    - Create Custom method in User Schema 
+        - isPasswordCorrect
+        - generateAccessToken
+        - generateRefreshToken
+    - Use Pre-Hook in User Schema to save encrypted password.

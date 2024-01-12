@@ -1,0 +1,10 @@
+1. How to encrypted password using bcrypt in pre hook.
+
+2. How to compare password using bcrypt in custom method.
+
+3. How to generate access token using jsonwebtoken in custom method.
+
+4. How to generate refresh token using jsonwebtoken in custom method.
+
+5. Add plugin in schema ("Video" Schema)
+    - plugin name : mongoose-aggregate-paginate-v2
