@@ -11,3 +11,7 @@
 6. npm i bcrypt
 
 7. npm i jsonwebtoken
+
+8. npm i cloudinary
+
+9. npm i multer

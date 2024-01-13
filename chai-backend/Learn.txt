@@ -8,3 +8,7 @@
 
 5. Add plugin in schema ("Video" Schema)
     - plugin name : mongoose-aggregate-paginate-v2
+
+6. How to upload file using multer and cloudinary (utils/cloudinary.js) : 
+    - User upload file from UI using multer and save in temp folder in our server.
+    - Using local file path in temp folder uploaded in cloudinary.

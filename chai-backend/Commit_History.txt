@@ -26,3 +26,9 @@
         - generateAccessToken
         - generateRefreshToken
     - Use Pre-Hook in User Schema to save encrypted password.
+
+8. Add Following : 
+    - Install cloudinary, multer
+    - How to upload file in cloudinary using multer.
+        - We create utility for this in utils/cloudinary.js
+    - Add multer middleware
