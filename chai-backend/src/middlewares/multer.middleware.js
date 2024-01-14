@@ -7,8 +7,24 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     console.log("Multer Middleware : (file) ::: ", file);
 
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.originalname + "-" + uniqueSuffix);
+    let fileExtension = "";
+    if (file.originalname.split(".").length > 1) {
+      fileExtension = file.originalname.substring(
+        file.originalname.lastIndexOf(".")
+      );
+    }
+    const filenameWithoutExtension = file.originalname
+      .toLowerCase()
+      .split(" ")
+      .join("-")
+      ?.split(".")[0];
+    cb(
+      null,
+      filenameWithoutExtension +
+        Date.now() +
+        Math.ceil(Math.random() * 1e5) + // avoid rare name conflict
+        fileExtension
+    );
   },
 });
 

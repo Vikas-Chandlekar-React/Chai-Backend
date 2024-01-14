@@ -38,3 +38,13 @@
         - Create method in controller 
         - Assign controller method with specific route
         - Register route in app.js
+
+10. Add Following : 
+    - Complete register route with testing using postman.
+    - Changes in utils/cloudinary.js
+        - add folder name in cloudinary
+    - Export both ApiError and ApiResponse at utils folder 
+    - Changes in multer.middleware.js
+        - Change filename when we stored on local server.
+    - add multer middleware in /register in user.routes.js 
+        - upload multiple file (Here, 2 different files)
