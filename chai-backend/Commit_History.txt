@@ -52,3 +52,8 @@
 11. Add Following : 
     - Create login, logout route. (Check user.routes.js and user.controller.js)
     - Create verifyJWT in auth.middleware.js
+
+12. Add Following : 
+    - Few bug fixes for login and logout api working.
+    - Testing login and logout api routes.
+    - Add and Test refresh-token route in user.routes.js and user.controller.js

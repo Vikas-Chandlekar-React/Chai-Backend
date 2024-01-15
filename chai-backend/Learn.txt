@@ -21,3 +21,7 @@
     - save({ validateBeforeSave: false });
         - It turn off validation rule because we want to save only few fields and does not run validation rule
     - Read Access token come from either browser or mobile in auth.middleware.js 
+
+8. Learn following :
+    - strict search when lowercase : true for field
+        - e.g. username in user.model.js
