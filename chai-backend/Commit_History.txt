@@ -48,3 +48,7 @@
         - Change filename when we stored on local server.
     - add multer middleware in /register in user.routes.js 
         - upload multiple file (Here, 2 different files)
+
+11. Add Following : 
+    - Create login, logout route. (Check user.routes.js and user.controller.js)
+    - Create verifyJWT in auth.middleware.js

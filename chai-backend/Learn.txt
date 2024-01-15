@@ -12,3 +12,12 @@
 6. How to upload file using multer and cloudinary (utils/cloudinary.js) : 
     - User upload file from UI using multer and save in temp folder in our server.
     - Using local file path in temp folder uploaded in cloudinary.
+
+7. Learn following : 
+    - Cookie    
+        - Send Secure cookie (which is not modified by client only server can modified)
+        - Send multiple cookie 
+        - clear multiple cookie 
+    - save({ validateBeforeSave: false });
+        - It turn off validation rule because we want to save only few fields and does not run validation rule
+    - Read Access token come from either browser or mobile in auth.middleware.js 
