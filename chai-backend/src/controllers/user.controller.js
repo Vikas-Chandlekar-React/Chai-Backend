@@ -200,27 +200,15 @@ const logoutUser = asyncHandler(async (req, res) => {
      *  3. clear cookie from frontend side
      */
 
-    // POINT : 1st way (using $set)
     await User.findByIdAndUpdate(
       req.user._id,
       {
-        $set: {
-          refreshToken: undefined,
+        $unset: {
+          refreshToken: 1, // this removes the field from document
         },
       },
       { new: true }
     );
-
-    // POINT : 2nd way (using $unset)
-    // await User.findByIdAndUpdate(
-    //   req.user._id,
-    //   {
-    //     $unset: {
-    //       refreshToken: 1, // this removes the field from document
-    //     },
-    //   },
-    //   { new: true }
-    // );
 
     const options = {
       httpOnly: true,

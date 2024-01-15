@@ -57,3 +57,6 @@
     - Few bug fixes for login and logout api working.
     - Testing login and logout api routes.
     - Add and Test refresh-token route in user.routes.js and user.controller.js
+
+13. Add Following : 
+    - Remove unnecessary code (not working) from logoutUser in user.controller.js
