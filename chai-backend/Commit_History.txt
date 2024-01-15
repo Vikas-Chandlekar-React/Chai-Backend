@@ -60,3 +60,6 @@
 
 13. Add Following : 
     - Remove unnecessary code (not working) from logoutUser in user.controller.js
+
+14. Add Following : 
+    - Add subscription schema in subscription.model.js
