@@ -1,5 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
+import { ApiError } from "./ApiError.js";
+import { extractPublicId } from "cloudinary-build-url";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -30,4 +32,18 @@ const uploadOnCloudinary = async (localFilePath) => {
   }
 };
 
-export { uploadOnCloudinary };
+const destroyImageFromCloudinary = async (cloudinaryImageURL) => {
+  try {
+    const publicId = extractPublicId(cloudinaryImageURL);
+    // console.log(`🚀 ~ destroyImageFromCloudinary ~ publicId:`, publicId);
+
+    const res = await cloudinary.uploader.destroy(publicId);
+    // console.log("res = ", res);
+    if (res.result === "not found")
+      throw new ApiError(404, "Cloudinary Avatar Image URL doesn't exists");
+  } catch (error) {
+    throw new ApiError(500, "Internal Server Error");
+  }
+};
+
+export { uploadOnCloudinary, destroyImageFromCloudinary };

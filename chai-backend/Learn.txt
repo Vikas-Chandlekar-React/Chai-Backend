@@ -25,3 +25,7 @@
 8. Learn following :
     - strict search when lowercase : true for field
         - e.g. username in user.model.js
+
+9. Learn following : 
+    - how to delete image from cloudinary when we have imageURL 
+    - Extract publicId from imageURL using cloudinary-build-url package because we need publicId to delete image from cloudinary

@@ -63,3 +63,11 @@
 
 14. Add Following : 
     - Add subscription schema in subscription.model.js
+
+15. Add Following : 
+    - Add following routes and test it using postman : 
+        - change-password (POST)
+        - current-user (GET)
+        - update-account (PATCH)
+        - avatar (PATCH)
+        - cover-image (PATCH)
