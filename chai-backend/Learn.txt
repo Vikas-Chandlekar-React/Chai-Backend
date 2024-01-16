@@ -29,3 +29,7 @@
 9. Learn following : 
     - how to delete image from cloudinary when we have imageURL 
     - Extract publicId from imageURL using cloudinary-build-url package because we need publicId to delete image from cloudinary
+
+10. Learn following : 
+    - Aggregation Pipeline
+        - lookup

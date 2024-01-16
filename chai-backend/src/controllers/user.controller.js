@@ -1,7 +1,11 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/ApiError.js";
 import { User } from "../models/user.model.js";
-import { destroyImageFromCloudinary, uploadOnCloudinary } from "../utils/cloudinary.js";
+import { Subscription } from "../models/subscription.model.js";
+import {
+  destroyImageFromCloudinary,
+  uploadOnCloudinary,
+} from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 
@@ -356,10 +360,10 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   const oldAvatarUrl = req.user?.avatar;
   // console.log(`🚀 ~ updateUserAvatar ~ oldAvatarUrl:`, oldAvatarUrl)
 
-  destroyImageFromCloudinary(oldAvatarUrl)
-  
+  destroyImageFromCloudinary(oldAvatarUrl);
+
   // throw new Error("Sachin..............................")
-  
+
   const avatar = await uploadOnCloudinary(avatarLocalPath);
 
   if (!avatar.url) {
@@ -415,6 +419,115 @@ const updateUserCoverImage = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, user, "Cover image updated successfully"));
 });
 
+const subscribedButtonClick = asyncHandler(async (req, res) => {
+  const { channelId } = req.params;
+  const subscribedUserId = req.user?._id;
+  console.log("##############################");
+
+  console.log(req.user._id);
+
+  console.table({ channelId, subscribedUserId });
+
+  const schemaObj = await Subscription.create({
+    subscriber: subscribedUserId,
+    channel: channelId,
+  });
+
+  console.log("schemaObj = ", schemaObj);
+
+  return res
+    .status(201)
+    .json(
+      new ApiResponse(201, schemaObj, "Subscribed Button Clicked Successfully")
+    );
+});
+
+const getUserChannelProfile = asyncHandler(async (req, res) => {
+  const { username } = req.params;
+
+  if (!username?.trim()) {
+    throw new ApiError(400, "Username is missing");
+  }
+
+  const channel = await User.aggregate([
+    {
+      // DESC : strict search even if username is lowercase : true in user schema
+      $match: {
+        username,
+      },
+    },
+
+    {
+      $lookup: {
+        from: "subscriptions",
+        localField: "_id",
+        foreignField: "channel",
+        as: "subscribers",
+      },
+    },
+
+    {
+      $lookup: {
+        from: "subscriptions",
+        localField: "_id",
+        foreignField: "subscriber",
+        as: "subscribedTo",
+      },
+    },
+
+    {
+      $addFields: {
+        subscribersCount: {
+          $size: "$subscribers",
+        },
+        channelsSubscribedToCount: {
+          $size: "$subscribedTo",
+        },
+        // POINT : 1st way
+        // isSubscribed: {
+        //   $cond: {
+        //     if: {
+        //       $in: [req.user?._id, "$subscribers.subscriber"],
+        //     },
+        //     then: true,
+        //     else: false,
+        //   },
+        // },
+
+        // POINT : 2nd way
+        isSubscribed: {
+          $in: [req.user?._id, "$subscribers.subscriber"],
+        },
+      },
+    },
+
+    {
+      $project: {
+        fullName: 1,
+        username: 1,
+        email: 1,
+        subscribersCount: 1,
+        channelsSubscribedToCount: 1,
+        isSubscribed: 1,
+        avatar: 1,
+        coverImage: 1,
+      },
+    },
+  ]);
+
+  // console.log("Aggregate Result ::: ", channel);
+
+  if (!channel?.length) {
+    throw new ApiError(404, "Channel does not exists");
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, channel[0], "User channel fetched successfully")
+    );
+});
+
 export {
   registerUser,
   loginUser,
@@ -425,4 +538,6 @@ export {
   updateAccountDetails,
   updateUserAvatar,
   updateUserCoverImage,
+  subscribedButtonClick,
+  getUserChannelProfile,
 };

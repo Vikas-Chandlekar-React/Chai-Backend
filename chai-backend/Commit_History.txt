@@ -71,3 +71,8 @@
         - update-account (PATCH)
         - avatar (PATCH)
         - cover-image (PATCH)
+
+16. Add Following : 
+    - Add following routes and test it using postman : 
+        - /subscribeButtonClick/:channelId (POST)
+        - /c/:username (GET)
