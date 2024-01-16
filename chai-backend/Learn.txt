@@ -33,3 +33,6 @@
 10. Learn following : 
     - Aggregation Pipeline
         - lookup
+
+11. Learn following : 
+    - How to write sub pipelines in aggregation $lookup

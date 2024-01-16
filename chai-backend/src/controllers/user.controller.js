@@ -8,6 +8,7 @@ import {
 } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
+import mongoose from "mongoose";
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -528,6 +529,69 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
     );
 });
 
+const getWatchHistory = asyncHandler(async (req, res) => {
+  const user = await User.aggregate([
+    {
+      $match: {
+        /** DESC:
+         *  - req.user?._id is string
+         *  - so used new mongoose.Types.ObjectId(req.user?._id) in aggregate queries only
+         */
+        _id: new mongoose.Types.ObjectId(req.user?._id),
+      },
+    },
+
+    {
+      $lookup: {
+        from: "videos",
+        localField: "watchedHistory",
+        foreignField: "_id",
+        as: "watchedHistory",
+
+        pipeline: [
+          {
+            $lookup: {
+              from: "users",
+              localField: "owner",
+              foreignField: "_id",
+              as: "owner",
+              pipeline: [
+                {
+                  $project: {
+                    fullName: 1,
+                    username: 1,
+                    avatar: 1,
+                  },
+                },
+              ],
+            },
+          },
+
+          {
+            // DESC : If you don't use this stage then owner populated data as array
+            // DESC : This stage give owner populated data as object
+            $addFields: {
+              owner: {
+                $first: "$owner",
+              },
+            },
+          },
+        ],
+      },
+    },
+  ]);
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        user[0].watchedHistory,
+        "Watch history fetched successfully"
+      )
+    );
+});
+
 export {
   registerUser,
   loginUser,
@@ -540,4 +604,5 @@ export {
   updateUserCoverImage,
   subscribedButtonClick,
   getUserChannelProfile,
+  getWatchHistory,
 };
