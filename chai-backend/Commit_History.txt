@@ -80,3 +80,7 @@
 17. Add Following : 
     - Add following routes : 
         - /history (GET)
+
+18. Add Following : 
+    - Add following models : 
+        - Comment, Like, Playlist, Tweet
